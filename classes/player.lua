@@ -3,7 +3,7 @@ local Player = Object:extend()
 movingState = { none = "none", up = "up", down = "down" }
 
 function Player:new(x, y)
-    Player.super:new(x, y)
+    Player.super.new(self, x, y)
     self.state = movingState.none
     self.speed = 500
     self.keys = { up = "up", down = "down" }
