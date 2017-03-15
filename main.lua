@@ -1,9 +1,12 @@
 Classic = require "libs/classic"
+Bump = require "libs/bump"
 Object = require "classes/object"
 Player = require "classes/player"
 
+world = Bump.newWorld()
 local player1 = Player(100, 200)
 local player2 = Player(700, 200)
+
 
 function love.load()
   player1.keys.up = "w"

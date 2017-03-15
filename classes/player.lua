@@ -3,7 +3,7 @@ local Player = Object:extend()
 movingState = { none = "none", up = "up", down = "down" }
 
 function Player:new(x, y)
-    Player.super:new(x, y)
+    Player.super.new(self, x, y, 20, 200)
     self.state = movingState.none
     self.speed = 500
     self.keys = { up = "up", down = "down" }
@@ -14,7 +14,7 @@ function Player:draw()
   y = self.y
   --print("x = " .. x .. ", y = " .. y)
   love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.rectangle("fill", x, y, 20, 200)
+  love.graphics.rectangle("fill", x, y, self.width, self.height)
 end
 
 function Player:update(dt)
@@ -34,9 +34,11 @@ end
 function Player:move(dt)
   print(self.state)
   if self.state == movingState.up then
-    self.y = self.y - self.speed * dt
+    newY = self.y - self.speed * dt
+    self:setPosition(self.x, newY)
   elseif self.state == movingState.down then
-    self.y = self.y + self.speed * dt
+    newY = self.y + self.speed * dt
+    self:setPosition(self.x, newY)
   end
 end
 
