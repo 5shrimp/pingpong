@@ -32,7 +32,7 @@ function Player:update(dt)
 end
 
 function Player:move(dt)
-  print(self.state)
+  --print(self.state)
   if self.state == movingState.up then
     newY = self.y - self.speed * dt
     self:setPosition(self.x, newY)
