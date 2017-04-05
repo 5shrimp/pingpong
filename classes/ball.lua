@@ -18,7 +18,7 @@ end
 function Ball:draw()
   x = self.x
   y = self.y
-  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setColor(255, 165, 0, 255)
   love.graphics.circle("fill", x, y, self.width/2)
   --love.graphics.rectangle("fill", x, y, self.width, self.width)
 end

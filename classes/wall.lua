@@ -7,7 +7,8 @@ end
 function Wall:draw()
   x = self.x
   y = self.y
-  love.graphics.setColor(198,115,189, 255)
+  --love.graphics.setColor(198, 115,189, 255)
+  love.graphics.setColor(0, 75, 45, 255)
   love.graphics.rectangle("fill", x, y, self.width, self.height)
 end
 
