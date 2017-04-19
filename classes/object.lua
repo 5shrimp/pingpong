@@ -17,21 +17,23 @@ function Object:setPosition(x, y)
   world:update(self, self.x, self.y)
 end
 
-function Object:move(goalX, goalY)
-  local actualX, actualY, collisions, collisionsCount = world:move(self, goalX, goalY, self.filter)
+function Object:update(dt)
+  if self.speed > 0 and (self.direction.y ~= 0 or self.direction.x ~=0) then
+    self:move(dt)
+  end
+end
+
+function Object:move(dt)
+  local goalX = self.x + self.speed * self.direction.x * dt
+  local goalY = self.y + self.speed * self.direction.y * dt
+  local actualX, actualY, collisions = world:move(self, goalX, goalY, self.filter)
   self.x = actualX
   self.y = actualY
-  if collisionsCount > 0 then
-    self.direction.x = self.direction.x - 2 * ( self.direction.x  * collisions[1].normal.x + self.direction.y  * collisions[1].normal.y) *  collisions[1].normal.x
-    self.direction.y = self.direction.y - 2 * (self.direction.x  * collisions[1].normal.x + self.direction.y  * collisions[1].normal.y ) *  collisions[1].normal.y
-    --print("AFTER: self.direction.x = " .. self.direction.x .. ", self.direction.y = " .. self.direction.y )
-    self.speed = self.speed + 20
-  end
-  return actualX, actualY, collisions, collisionsCount
+  return collisions
 end
 
 function Object:filter(item, other)
-  return 'bounce'
+  return 'touch'
 end
 
 return Object

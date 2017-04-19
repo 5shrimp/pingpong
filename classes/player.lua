@@ -10,35 +10,19 @@ function Player:new(x, y)
 end
 
 function Player:draw()
-  x = self.x
-  y = self.y
-  --print("x = " .. x .. ", y = " .. y)
   love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.rectangle("fill", x, y, self.width, self.height)
+  love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
 function Player:update(dt)
+  Player.super.update(self, dt)
   -- check for keyboard and set state
   if love.keyboard.isDown(self.keys.up) then
-    self.state = movingState.up
+    self.direction.y = -1
   elseif love.keyboard.isDown(self.keys.down) then
-    self.state = movingState.down
+    self.direction.y = 1
   else
-    self.state = movingState.none
-  end
-
-  -- update from states and check for height = love.graphics.getHeight( )
-  self:move(dt)
-end
-
-function Player:move(dt)
-  --print(self.state)
-  if self.state == movingState.up then
-    newY = self.y - self.speed * dt
-    self:setPosition(self.x, newY)
-  elseif self.state == movingState.down then
-    newY = self.y + self.speed * dt
-    self:setPosition(self.x, newY)
+    self.direction.y = 0
   end
 end
 

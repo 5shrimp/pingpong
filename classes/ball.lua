@@ -2,30 +2,29 @@ local Ball = Object:extend()
 
 function Ball:new(x, y)
   Ball.super.new(self, x, y, 20, 20)
-  self.moving = false
   self.speed = 300
 end
 
-function Ball:update(dt)
-  if self.moving == true then
-    newX = self.x + self.speed * self.direction.x * dt
-    newY = self.y + self.speed * self.direction.y * dt
-    local actualX, actualY, collisions, collisionsCount = self:move(newX, newY)
-    --print("newX = " .. newX .. ", newY = " .. newY)
-  end
-end
-
 function Ball:draw()
-  x = self.x
-  y = self.y
   love.graphics.setColor(255, 165, 0, 255)
-  love.graphics.circle("fill", x, y, self.width/2)
-  --love.graphics.rectangle("fill", x, y, self.width, self.width)
+  love.graphics.circle("fill", self.x + self.width/2, self.y + self.width/2, self.width/2)
 end
 
 function Ball:go()
-  self.moving = true
   self.direction = { x = math.random(), y = math.random() }
+end
+
+function Ball:move(dt)
+  local collisions = Ball.super.move(self, dt)
+  if #collisions > 0 then
+    self.direction.x = self.direction.x - 2 * ( self.direction.x * collisions[1].normal.x + self.direction.y * collisions[1].normal.y) * collisions[1].normal.x
+    self.direction.y = self.direction.y - 2 * (self.direction.x * collisions[1].normal.x + self.direction.y * collisions[1].normal.y ) * collisions[1].normal.y
+    self.speed = self.speed + 20
+  end
+end
+
+function Object:filter(item, other)
+  return 'bounce'
 end
 
 return Ball
