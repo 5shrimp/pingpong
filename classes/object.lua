@@ -7,6 +7,8 @@ function Object:new(x, y, w, h)
   self:setPosition(x, y)
   self.speed = 0
   self.direction = { x = 0, y = 0 }
+  updater:add(self)
+  drawer:add(self, "objects")
 end
 
 function Object:setPosition(x, y)
@@ -34,6 +36,10 @@ end
 
 function Object:filter(item, other)
   return 'touch'
+end
+
+function Object:draw()
+  --implement by subclasses
 end
 
 return Object
