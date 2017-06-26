@@ -8,22 +8,17 @@ Player = require "classes/player"
 Ball = require "classes/ball"
 Wall = require "classes/wall"
 Level = require "classes/level"
-
+Game = require "classes/game"
 
 function love.load()
   drawer:load()
 
   world = Bump.newWorld()
-  local player1 = Player(100, 200)
-  local player2 = Player(700, 200)
-  local ball = Ball(300, 100)
 
+  local game = Game()
   local level = Level()
 
-  player1.keys.up = "w"
-  player1.keys.down = "s"
-  player2.keys.up = "up"
-  player2.keys.down = "down"
+  local ball = Ball(300, 100)
   ball:go()
 end
 

@@ -1,9 +1,26 @@
 local Player = Object:extend()
 
-function Player:new(x, y)
+PlayerInputScheme = {
+  wasd = {
+    up = "w",
+    down = "s"
+  },
+  arrows = {
+    up = "up",
+    down = "down"
+  }
+ }
+
+function Player:new(x, y, scheme)
     Player.super.new(self, x, y, 20, 200)
     self.speed = 500
-    self.keys = { up = "up", down = "down" }
+
+    if scheme == nil then
+      self.keys = PlayerInputScheme.arrows
+    else
+      self.keys = scheme
+    end
+
 end
 
 function Player:draw()
