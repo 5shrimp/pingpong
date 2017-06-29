@@ -1,14 +1,20 @@
 updater = require "classes/updater"
 drawer = require "classes/drawer"
 
+lume = require "libs/lume"
+
 Classic = require "libs/classic"
 Bump = require "libs/bump"
+Event = require "libs/event"
+
 Object = require "classes/object"
 Player = require "classes/player"
 Ball = require "classes/ball"
 Wall = require "classes/wall"
 Level = require "classes/level"
 Game = require "classes/game"
+Trigger = require "classes/trigger"
+
 
 function love.load()
   drawer:load()
@@ -18,8 +24,8 @@ function love.load()
   local game = Game()
   local level = Level()
 
-  local ball = Ball(300, 100)
-  ball:go()
+  --local ball = Ball(300, 100)
+  --ball:go()
 end
 
 function love.draw()

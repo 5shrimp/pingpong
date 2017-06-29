@@ -2,7 +2,7 @@ local Ball = Object:extend()
 
 function Ball:new(x, y)
   Ball.super.new(self, x, y, 20, 20)
-  self.speed = 300
+  --self.speed = 300
 end
 
 function Ball:draw()
@@ -11,7 +11,14 @@ function Ball:draw()
 end
 
 function Ball:go()
+  self.speed = 300
   self.direction = { x = math.random(), y = math.random() }
+end
+
+function Ball:reset()
+  self.x = 300
+  self.y = 100
+  self.speed = 0
 end
 
 function Ball:move(dt)
@@ -23,8 +30,21 @@ function Ball:move(dt)
   end
 end
 
-function Object:filter(item, other)
-  return 'bounce'
+function Ball:filter(item, other)
+  if item == nil then
+    return 'bounce'
+  end
+
+  if item:is(Trigger) then
+    return 'cross'
+  else
+    return 'bounce'
+  end
 end
+
+function Ball:description()
+  return "Ball"
+end
+
 
 return Ball

@@ -2,28 +2,33 @@ local Game = Classic:extend()
 
 function Game:new()
   self.players = {
-    {
+    left = {
       object = Player(100, 200, PlayerInputScheme.wasd),
       score = 0
     },
-    {
+    right = {
       object = Player(700, 200, PlayerInputScheme.arrows),
       score = 0
     }
   }
+
+  self.ball = Ball(300, 100)
+  self.ball:go()
+
+  self.hitHandler = Event.on('hit', function(side)
+    self:hitBy(self.players[side])
+   end)
 end
 
-function Game:addScore(player)
-  for _, value in ipairs(self.players) do
-    if value == player then
-      value.score = value.score + 1
-    end
-  end
-  self.printScore()
+function Game:hitBy(player)
+  player.score = player.score + 1
+  self:printScore()
+  self.ball:reset()
+  self.ball:go()
 end
 
 function Game:printScore()
-  print("player1:"..self.players[1].score..", player2:"..self.players[2].score)
+  print("left:"..self.players.left.score..", right:"..self.players.right.score)
 end
 
 function Game:isOver()

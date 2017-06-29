@@ -9,4 +9,8 @@ function Wall:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
+function Wall:description()
+  return "Wall"
+end
+
 return Wall

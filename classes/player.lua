@@ -40,4 +40,8 @@ function Player:update(dt)
   end
 end
 
+function Player:description()
+  return "Player"
+end
+
 return Player
