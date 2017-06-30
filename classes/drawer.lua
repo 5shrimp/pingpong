@@ -1,6 +1,7 @@
 local layerNames = {
   "background",
   "objects",
+  "effects",
   "gui"
 }
 

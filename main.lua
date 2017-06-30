@@ -14,6 +14,7 @@ Wall = require "classes/wall"
 Level = require "classes/level"
 Game = require "classes/game"
 Trigger = require "classes/trigger"
+Blast = require "classes/blast"
 
 
 function love.load()
@@ -24,8 +25,6 @@ function love.load()
   local game = Game()
   local level = Level()
 
-  --local ball = Ball(300, 100)
-  --ball:go()
 end
 
 function love.draw()

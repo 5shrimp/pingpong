@@ -15,12 +15,17 @@ function Game:new()
   self.ball = Ball(300, 100)
   self.ball:go()
 
+  self.blasts = {}
+
   self.hitHandler = Event.on('hit', function(side)
     self:hitBy(self.players[side])
    end)
 end
 
 function Game:hitBy(player)
+  local blast = Blast(self.ball.x, self.ball.y)
+  table.insert(self.blasts, blast)
+
   player.score = player.score + 1
   self:printScore()
   self.ball:reset()

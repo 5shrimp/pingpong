@@ -12,7 +12,8 @@ end
 
 function Ball:go()
   self.speed = 300
-  self.direction = { x = math.random(), y = math.random() }
+  self.direction = { x = 1, y = 1 }
+  --self.direction = { x = math.random(), y = math.random() }
 end
 
 function Ball:reset()
@@ -41,6 +42,7 @@ function Ball:filter(item, other)
     return 'bounce'
   end
 end
+
 
 function Ball:description()
   return "Ball"
